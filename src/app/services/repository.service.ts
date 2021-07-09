@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { environment } from 'src/environments/environment';
+import * as env from 'src/environments/environment';
 import { Observable, of } from 'rxjs';
 import { PINS } from './mocks/pins';
 
@@ -8,10 +8,12 @@ import { PINS } from './mocks/pins';
   providedIn: 'root'
 })
 export class RepositoryService {
+  private _environment = env.environment;
+  get environment() { return this._environment };
   constructor(private api: ApiService) {}
 
   public getPins() {
-    if (environment.mocks) {
+    if (this.environment.mocks) {
       return of(PINS);
     } else {
       return this.api.get('');
@@ -19,7 +21,7 @@ export class RepositoryService {
   }
 
   public savePins(body) {
-    if (environment.mocks) {
+    if (this.environment.mocks) {
       return of(body);
     } else {
       return this.api.post('', body);
@@ -27,7 +29,7 @@ export class RepositoryService {
   }
 
   public updatePin(id, body) {
-    if (environment.mocks) {
+    if (this.environment.mocks) {
       return of(body);
     } else {
       return this.api.put('/' + id, body);

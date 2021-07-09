@@ -23,11 +23,11 @@ export class ApiService {
     return this.http.post(this.url + endpoint, body, reqOpts);
   }
 
-  public put(endpoint: string, body: any, reqOpts?: any) {
+  public put(endpoint: string, body: any, reqOpts?: any): Observable<any> {
     return this.http.put(this.url + endpoint, body, reqOpts);
   }
 
-  public delete(endpoint: string, reqOpts?: any) {
+  public delete(endpoint: string, reqOpts?: any): Observable<any> {
     return this.http.delete(this.url + endpoint, reqOpts);
   }
 }
